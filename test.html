@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="js/lazyLoad.js"></script>
+
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        ul{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        img{
+            border: none;
+            vertical-align: middle;
+        }
+        .in{
+            border: 1px solid black;
+            margin: 10px;
+            text-align: center;
+            height: 300px;
+            width: 300px;
+            float: left;
+        }
+        .in img{
+            height: 300px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+<ul class="list">
+    <li class="in"><img src="img/loading.png" alt="测试" data-src = "img/1.jpg"></li>
+    <li class="in"><img src="img/loading.png" alt="测试" data-src = "img/2.jpg"></li>
+    <li class="in"><img src="img/loading.png" alt="测试" data-src = "img/3.jpg"></li>
+    <li class="in"><img src="img/loading.png" alt="测试" data-src = "img/4.jpg"></li>
+    <li class="in"><img src="img/loading.png" alt="测试" data-src = "img/5.jpg"></li>
+    <li class="in"><img src="img/loading.png" alt="测试" data-src = "img/5.jpg"></li>
+    <li class="in"><img src="img/loading.png" alt="测试" data-src = "img/6.jpg"></li>
+    <li class="in"><img src="img/loading.png" alt="测试" data-src = "img/7.jpg"></li>
+    <li class="in"><img src="img/loading.png" alt="测试" data-src = "img/7.jpg"></li>
+    <li class="in"><img src="img/loading.png" alt="测试" data-src = "img/7.jpg"></li>
+    <li class="in"><img src="img/loading.png" alt="测试" data-src = "img/8.jpg"></li>
+    <li class="in"><img src="img/loading.png" alt="测试" data-src = "img/8.jpg"></li>
+    <li class="in"><img src="img/loading.png" alt="测试" data-src = "img/8.jpg"></li>
+    <li class="in"><img src="img/loading.png" alt="测试" data-src = "img/8.jpg"></li>
+    <li class="in"><img src="img/loading.png" alt="测试" data-src = "img/8.jpg"></li>
+    <li class="in"><img src="img/loading.png" alt="测试" data-src = "img/8.jpg"></li>
+    <li class="in"><img src="img/loading.png" alt="测试" data-src = "img/8.jpg"></li>
+    <li class="in"><img src="img/loading.png" alt="测试" data-src = "img/8.jpg"></li>
+    <li class="in"><img src="img/loading.png" alt="测试" data-src = "img/8.jpg"></li>
+    <li class="in"><img src="img/loading.png" alt="测试" data-src = "img/8.jpg"></li>
+    <li class="in"><img src="img/loading.png" alt="测试" data-src = "img/8.jpg"></li>
+    <li class="in"><img src="img/loading.png" alt="测试" data-src = "img/8.jpg"></li>
+</ul>
+
+<script>
+    var aImages = document.getElementsByTagName("img");
+    var defaultImg=aImages[0].getAttribute("src");
+    var relSrc='data-src';
+
+    lazyLoad.lazyFn(aImages,defaultImg,relSrc);
+    window.onscroll = function(){
+        lazyLoad.lazyFn(aImages,defaultImg,relSrc);
+    };
+
+
+
+
+/*
+    function loadImg(imgList){
+        for( var i = 0,len = imgList.length; i < len; i++){
+
+            //获取元素与页面的距离  getBoundingClientRect()返回一个矩形对象 getBoundingClientRect.top/bottom/left/right
+            if(imgList[i].getBoundingClientRect().top< document.documentElement.clientHeight && !imgList[i].isLoad){
+                imgList[i].isLoad = true;
+                
+                //cssText批量操作属性 但是完全覆盖之前的样式
+                imgList[i].style.cssText = "transition: ''; opacity: 0;";
+
+                //如果浏览器不支持dataset，就是用getAttribute获取data-属性
+                if(imgList[i].dataset){
+                    imgList[i].src=imgList[i].dataset.src;
+                }else{
+                    imgList[i].src=imgList[i].getAttribute("data-src");
+                }
+
+                //延时加载  使图片有渐渐载入的效果
+                (function(i){
+                    setTimeout(function(){
+                        imgList[i].style.cssText = "transition: 1s; opacity: 1;"
+                    },10)
+                })(i);
+            }
+        }
+    }
+/!*    function aftLoadImg(obj,url){
+      /!*  var oImg = new Image();
+        oImg.onload = function(){
+            obj.src = oImg.src;
+        }
+        oImg.src = url;*!/
+        obj.src=url;
+    }*!/
+*/
+
+</script>
+</body>
+</html>

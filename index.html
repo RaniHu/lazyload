@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="js/jquery-1.9.1-min.js"></script>
+    <script src="js/lazyLoad.js"></script>
+    <title>图片懒加载</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    img {
+        float: left;
+        width: 300px;
+        height: 200px;
+        display: block;
+        margin: 5px;
+        vertical-align: middle;
+    }
+</style>
+<body>
+<!--什么是懒加载？
+    当页面被请求时，只加载可视区域的图片，其它部分的图片则不加载，
+    只有这些图片出现在可视区域时才会动态加载这些图片，
+    从而节约了网络带宽和提高了初次加载的速度-->
+
+<!--思路
+    1.所有img图片src指向一张小的默认图片
+    2.data-src为图片真实地址
+    3.载入页面时，将可视区域的图片data-src属性值赋给src
+    4.监听滚动事件，将用户即将看到的图片加载
+-->
+<div id="imgBox">
+    <img src="img/loading.png" data-src="img/1.jpg">
+    <img src="img/loading.png" data-src="img/2.jpg">
+    <img src="img/loading.png" data-src="img/3.jpg">
+    <img src="img/loading.png" data-src="img/4.jpg">
+    <img src="img/loading.png" data-src="img/5.jpg">
+    <img src="img/loading.png" data-src="img/6.jpg">
+    <img src="img/loading.png" data-src="img/7.jpg">
+    <img src="img/loading.png" data-src="img/7.jpg">
+    <img src="img/loading.png" data-src="img/7.jpg">
+    <img src="img/loading.png" data-src="img/7.jpg">
+    <img src="img/loading.png" data-src="img/7.jpg">
+    <img src="img/loading.png" data-src="img/8.jpg">
+    <img src="img/loading.png" data-src="img/8.jpg">
+    <img src="img/loading.png" data-src="img/8.jpg">
+    <img src="img/loading.png" data-src="img/8.jpg">
+    <img src="img/loading.png" data-src="img/8.jpg">
+    <img src="img/loading.png" data-src="img/8.jpg">
+    <img src="img/loading.png" data-src="img/8.jpg">
+    <img src="img/loading.png" data-src="img/8.jpg">
+    <img src="img/loading.png" data-src="img/8.jpg">
+    <img src="img/loading.png" data-src="img/8.jpg">
+    <img src="img/loading.png" data-src="img/8.jpg">
+    <img src="img/loading.png" data-src="img/8.jpg">
+    <img src="img/loading.png" data-src="img/8.jpg">
+    <img src="img/loading.png" data-src="img/8.jpg">
+    <img src="img/loading.png" data-src="img/8.jpg">
+    <img src="img/loading.png" data-src="img/8.jpg">
+    <img src="img/loading.png" data-src="img/8.jpg">
+</div>
+
+<script>
+
+    //要懒加载的对象
+    var imgLazy = document.getElementById("imgBox").getElementsByTagName("img");
+    var defaultImg = imgLazy[0].getAttribute("src");
+    var relSrc = 'data-src';
+
+    //加载函数
+    lazyLoad.preShake(lazyLoad.lazyFn(imgLazy, defaultImg, relSrc), 500, 300);
+
+
+    //监听滚动事件
+    window.onload = function () {
+        window.onscroll = function () {
+            lazyLoad.preShake(lazyLoad.lazyFn(imgLazy, defaultImg, relSrc), 500, 300);
+        }
+    };
+
+
+
+    var count = 0;
+    function countNum() {
+        console.log(++count);
+    }
+    //监听窗口改变事件
+    window.onresize = lazyLoad.throttle(countNum, 500);
+
+
+</script>
+
+</body>
+</html>
